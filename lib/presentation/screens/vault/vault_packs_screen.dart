@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -105,7 +106,12 @@ class _VaultPacksScreenState extends ConsumerState<VaultPacksScreen> {
     setState(() => _syncingManifest = true);
     try {
       final dio = Dio(BaseOptions(connectTimeout: const Duration(seconds: 4)));
-      final resp = await dio.get('http://localhost:3000/api/packs/pack_gov_ss_v1');
+      final baseUrl = kIsWeb
+          ? (Uri.base.host == 'localhost' || Uri.base.host == '127.0.0.1'
+              ? 'http://localhost:3000'
+              : Uri.base.origin)
+          : 'https://cbt-app-iota.vercel.app';
+      final resp = await dio.get('$baseUrl/api/packs/pack_gov_ss_v1');
       final rawJson = resp.data is String
           ? resp.data as String
           : jsonEncode(resp.data['pack'] ?? resp.data);

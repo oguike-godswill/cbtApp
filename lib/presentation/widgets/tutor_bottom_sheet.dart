@@ -53,7 +53,7 @@ class _TutorBottomSheetState extends State<TutorBottomSheet> {
       }
       return Uri.base.origin;
     }
-    return 'http://10.0.2.2:3000';
+    return 'https://cbt-app-iota.vercel.app';
   }
 
   Future<void> _send(String prompt) async {
