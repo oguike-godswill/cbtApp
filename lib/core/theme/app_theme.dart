@@ -187,6 +187,53 @@ class AppTheme {
           );
         }),
       ),
+      navigationRailTheme: NavigationRailThemeData(
+        backgroundColor: tokens.surface,
+        indicatorColor: tokens.emeraldSoft,
+        selectedIconTheme: IconThemeData(color: tokens.emerald),
+        unselectedIconTheme: IconThemeData(color: tokens.mutedInk),
+        selectedLabelTextStyle: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          color: tokens.emerald,
+        ),
+        unselectedLabelTextStyle: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: tokens.mutedInk,
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: tokens.surface,
+        selectedColor: tokens.emeraldSoft,
+        checkmarkColor: tokens.emerald,
+        side: BorderSide(color: tokens.border),
+        labelStyle: TextStyle(
+          color: tokens.ink,
+          fontWeight: FontWeight.w500,
+        ),
+        secondaryLabelStyle: TextStyle(
+          color: tokens.emerald,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return tokens.emeraldSoft;
+            }
+            return tokens.surface;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return tokens.emerald;
+            }
+            return tokens.ink;
+          }),
+          side: WidgetStatePropertyAll(BorderSide(color: tokens.border)),
+        ),
+      ),
       dividerTheme: DividerThemeData(color: tokens.border, thickness: 1),
       textTheme: TextTheme(
         headlineMedium: TextStyle(
