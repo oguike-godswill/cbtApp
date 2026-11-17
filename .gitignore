@@ -50,3 +50,4 @@ app.*.map.json
 # Backend Node dependencies & secrets
 backend/node_modules/
 backend/.env
+node_modules/

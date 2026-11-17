@@ -135,6 +135,10 @@ app.post('/api/tutor/chat', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`NaijaPrep Backend Proxy listening on http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`NaijaPrep Backend Proxy listening on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

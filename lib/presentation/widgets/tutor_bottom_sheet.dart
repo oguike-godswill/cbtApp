@@ -40,9 +40,21 @@ class _TutorBottomSheetState extends State<TutorBottomSheet> {
     super.dispose();
   }
 
-  String get _resolvedBackendUrl =>
-      widget.backendUrl ??
-      (kIsWeb ? 'http://localhost:3000' : 'http://10.0.2.2:3000');
+  static const String _envBaseUrl =
+      String.fromEnvironment('API_BASE_URL', defaultValue: '');
+
+  String get _resolvedBackendUrl {
+    if (widget.backendUrl != null) return widget.backendUrl!;
+    if (_envBaseUrl.isNotEmpty) return _envBaseUrl;
+    if (kIsWeb) {
+      final host = Uri.base.host;
+      if (host == 'localhost' || host == '127.0.0.1') {
+        return 'http://localhost:3000';
+      }
+      return Uri.base.origin;
+    }
+    return 'http://10.0.2.2:3000';
+  }
 
   Future<void> _send(String prompt) async {
     final trimmed = prompt.trim();
